@@ -1,0 +1,17 @@
+---
+ #COPY MASTER-redis CONF
+- name: Copy Redis template
+  template:
+    src: "template/master-redis"
+    dest: "/root/"
+    mode: 777
+  become: true
+  #when:
+
+ #COPY SLAVE-redis
+- name: Copy Sentinel template
+  template:
+    src: "slave-redis"
+    dest: "/root/"
+    mode: 777
+  become: true

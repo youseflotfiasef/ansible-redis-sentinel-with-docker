@@ -1,0 +1,15 @@
+---
+# vars file for RedisCluster
+docker_apt_release_channel: stable
+docker_apt_arch: amd64
+docker_apt_repository: "deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"
+#docker_apt_gpg_key: "https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
+docker_apt_gpg_key: "https://download.docker.com/linux/ubuntu/gpg"
+docker_compose_version: "v2.6.1"
+#######variable master
+master_host: "{{ hostvars[master:]['ansible_default_ipv4']['address'] }}"
+slave_host:  "{{ hostvars[slave:]['ansible_default_ipv4']['address'] }}"
+path_master_redis: /root/sentinel/master-redis
+path_slave_redis: "/opt/sentinel/slave-redis"
+master_redis: "/media/joseph/Other/ansible/redis-sentinel-me2/roles/master/template/"
+#slave-redis: "/media/joseph/Other/ansible/redis-sentinel-me2/roles/master/templates/"

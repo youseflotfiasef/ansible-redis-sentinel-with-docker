@@ -1,0 +1,17 @@
+---
+- name: Overcommit_memory warnings Fix
+  lineinfile:
+    path: "/etc/sysctl.conf"
+    line: "vm.overcommit_memory = 1"
+  become: true
+
+# Fix Transparent Huge Pages warnings
+- name: Transparent Huge Pages Fix
+  replace:
+    path: /sys/kernel/mm/transparent_hugepage/enabled
+    regexp: '[always] madvise never'
+    replace: 'never'
+  become: true
+  ignore_errors: True
+
+

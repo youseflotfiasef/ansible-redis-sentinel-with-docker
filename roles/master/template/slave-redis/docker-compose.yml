@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+  redis-slave1:
+          # image: redis:6-alpine
+    image: redislabs/redisearch:2.0.2
+    command: ["redis-server", "--loadmodule", "/usr/lib/redis/modules/redisearch.so", "--appendonly", "yes", "--aof-use-rdb-preamble", "yes", "--slaveof 172.24.30.161 6379"]
+
+    sysctls:
+      - net.core.somaxconn=65535
+    volumes:
+      - "./.data:/data"
+    ports:
+      - "0.0.0.0:6379:6379"
+        #networks:
+       #- redis-net
+
+#  # Instance 1
+  redis-sentinel2:
+   build:
+     context: ./redis-sentinel
+   environment:
+      - SENTINEL_DOWN_AFTER=5000
+      - SENTINEL_FAILOVER=5000
+      - SENTINEL_QUORUM=2
+      - MASTER_HOST=172.24.30.161
+   links:
+     #- redis-master  
+     - redis-slave1
+   ports:
+     -  "0.0.0.0:26379:26379"
+       #networks:
+       #- redis-net
+
+volumes:
+  redis-data:
+    driver: local       
+    #networks:
+    #redis-net:
+    #driver: bridge
+

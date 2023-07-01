@@ -1,0 +1,29 @@
+---
+- name: Open up port 8822 on iptables
+  shell: iptables -I INPUT -p tcp --dport 8822 -j ACCEPT; service iptables save; service iptables reload
+
+- name: Open up port 9100 on iptables
+  shell: iptables -I INPUT -p tcp --dport 9100 -j ACCEPT; service iptables save; service iptables reload
+    ######redis and sentinel port open in iptables ########    
+
+- name: Open up port 6379 on iptables
+  shell: iptables -I INPUT -p tcp --dport 6379 -j ACCEPT; service iptables save; service iptables reload
+
+- name: Open up port 26379 on iptables
+  shell: iptables -I INPUT -p tcp --dport 26379 -j ACCEPT; service iptables save; service iptables reload
+
+- name: check rule and and  get iptables rules
+  shell: sudo iptables -L
+
+######docker rule allow to iptables #####
+
+- name: add redis-container
+  shell: sudo iptables -I DOCKER-USER -i ens160 -s 0.0.0.0 -p tcp \
+    -m conntrack --ctorigdstport 6379 -j ACCEPT ; service iptables save; service iptables reload
+
+- name: add sentinel-container 
+  shell: sudo iptables -I DOCKER-USER -i ens160 -s 0.0.0.0 -p tcp \
+    -m conntrack --ctorigdstport 26379 -j ACCEPT ; service iptables save; service iptables reload
+
+- name: redis and sentinel docker rule iptables  | get iptables rules
+  shell: iptables -L

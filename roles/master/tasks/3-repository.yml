@@ -1,0 +1,15 @@
+  # - name: rsync installed
+  #   package:
+  #     name: rsync
+  #     state: present
+  #   become: true
+  # - name: data synchronization
+  #   shell: rsync  -a {{master_redis}}  /opt/sentinel
+
+  - name: Copying '/root/CodePlay' to Provision Server under '/tmp' directory
+    copy:
+      src: '{{master_redis}}'
+      dest: '/opt/sentinel'
+      directory_mode: True
+      owner: root
+      group: root 

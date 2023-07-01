@@ -1,0 +1,7 @@
+###baser repository docker-compose in run server 
+
+https://github.com/Developers-Notebook/Redis-Sentinel-Docker-Compose.git
+
+##base repository for ansible install server 
+
+https://github.com/tmeralus/ansible-role-redis-sentinel-HA.git

@@ -1,0 +1,7 @@
+- import_tasks: "0-system.yml"
+#- import_tasks: "1-install-docker.yml"
+#- import_tasks: "2-iptables.yml"
+- import_tasks: "3-repository.yml"
+- import_tasks: "4-start.yml"
+
+

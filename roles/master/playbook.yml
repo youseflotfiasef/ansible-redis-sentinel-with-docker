@@ -1,0 +1,26 @@
+---
+- hosts: master
+  become: true
+  user: root
+  gather_facts: true
+    #roles: 
+    #- master
+    #- vars: 
+    #master-redis: true 
+  tasks:
+    - name: Include OS-specific variables.
+      include_vars: "{{ playbook_dir }}/defaults/main.yml"
+    - import_tasks: "{{ playbook_dir }}/tasks/main.yml"
+
+- hosts: slave
+  become: true
+  user: root
+  gather_facts: true
+  # roles:
+  #   - role: slave-redis
+  #   - vars: 
+  #       slave-redis: true 
+  tasks:
+    - name: Include OS-specific variables.
+      include_vars: "{{ playbook_dir }}/defaults/main.yml"
+    - import_tasks: "{{ playbook_dir }}/tasks/main.yml"

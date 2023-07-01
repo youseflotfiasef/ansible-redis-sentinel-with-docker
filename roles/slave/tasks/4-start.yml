@@ -1,0 +1,18 @@
+
+---
+   - name: Check all running containers
+     become: true
+     shell: docker ps --format "{{ \.Names }}"
+     register: dkr_ps  
+   - debug: msg="{{dkr_ps}}"
+
+
+   - name: start docker-compose
+     #path:  "/root/slave_redis/"
+     shell: |
+       cd /root/slave-redis
+       docker-compose up -d --build 
+     become: true
+
+   - debug:
+       msg: "Restart All servers to resolve the overcommit and transparent huge page warnings"

@@ -1,0 +1,10 @@
+---
+# MAIN REDIS CONFIGUTATION SETTINGS
+
+redis_master_name: master-redis
+sentinel_requirepass: #password123
+
+master_redis: master-redis
+sentinel_requirepass_master: 123465
+slave_redis: slave-redis
+sentinel_requirepass_slave:  123465

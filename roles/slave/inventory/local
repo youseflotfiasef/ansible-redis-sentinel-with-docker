@@ -1,0 +1,13 @@
+[all:vars]
+log_base_path=/tmp
+test_environment=true
+
+[master]
+master redis-roles=master
+10.235.225.76
+
+[slave]
+slave1 redis-roles=slave
+10.235.225.135
+
+

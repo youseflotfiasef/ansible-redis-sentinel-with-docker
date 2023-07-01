@@ -1,0 +1,19 @@
+---
+#- name: Configure common things
+#  hosts: all
+#  user: root
+#  roles:
+#    - roles
+
+- name: Configure master node
+  hosts: master
+  user: root
+  roles:
+    - roles/master
+
+- name: Configure slave node
+  hosts: slave
+  user: root
+  roles:
+    - roles/slave
+
