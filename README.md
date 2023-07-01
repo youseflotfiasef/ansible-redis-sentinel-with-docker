@@ -1,1 +1,1 @@
-# ansible redis sentinel with docker vm server seprate and slave seprate 
+ansible redis sentinel with docker vm server seprate and slave seprate 
